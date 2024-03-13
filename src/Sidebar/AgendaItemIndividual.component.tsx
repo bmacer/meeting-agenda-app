@@ -26,8 +26,8 @@ const AgendaItemIndividual = ({
   provided,
   item,
 }: {
-  provided: DraggableProvided;
-  item: AgendaItem;
+  provided?: DraggableProvided;
+  item?: AgendaItem;
 }) => {
   const {
     agendaItems,
@@ -70,11 +70,12 @@ const AgendaItemIndividual = ({
     });
     setAgendaItems(newItems);
   };
+  if (!item) return <></>;
   return (
     <Box
-      ref={provided.innerRef}
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
+      ref={provided?.innerRef}
+      {...provided?.draggableProps}
+      {...provided?.dragHandleProps}
       bgColor={currentAgendaItem === item ? "#48BF91" : "#0076BE"}
       style={{
         userSelect: "none",
@@ -85,7 +86,7 @@ const AgendaItemIndividual = ({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        ...provided.draggableProps.style,
+        ...provided?.draggableProps.style,
       }}
     >
       <DurationForItem item={item} />

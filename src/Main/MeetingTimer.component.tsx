@@ -3,13 +3,18 @@ import { useAgenda } from "../AgendaContext";
 import { Box, Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
 import CurrentTime from "./CurrentTime";
 import CurrentItem from "./CurrentItem.component";
+import AgendaItemIndividual from "../Sidebar/AgendaItemIndividual.component";
 
 const MeetingTimer = ({ meetingStartDate }: { meetingStartDate: Date }) => {
   const [timeUntilMeeting, setTimeUntilMeeting] = useState<string>("");
   const [timeElapsed, setTimeElapsed] = useState<string>("");
   const [timeRemaining, setTimeRemaining] = useState<string>("");
-  const { secondsUnderway, setSecondsUnderway, meetingTimeRemaining } =
-    useAgenda();
+  const {
+    secondsUnderway,
+    setSecondsUnderway,
+    meetingTimeRemaining,
+    currentAgendaItem,
+  } = useAgenda();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -60,23 +65,47 @@ const MeetingTimer = ({ meetingStartDate }: { meetingStartDate: Date }) => {
   return (
     <Flex w="100%" h="100%" justifyContent="center">
       {secondsUnderway < 1 ? (
-        <VStack w="100%">
-          <Spacer />
-          <Flex>
-            <Text as="h3" fontSize="20px" textAlign="center">
-              Time Until Meeting Starts:
-            </Text>
-          </Flex>
-          <Flex>
-            <Text as="h3" fontSize="150px">
-              {timeUntilMeeting}
-            </Text>
-          </Flex>
-          <Spacer />
-        </VStack>
+        <>
+          <VStack w="100%">
+            {true && (
+              <Box
+                w="100px"
+                h="100px"
+                bgColor="red"
+                position="absolute"
+                zIndex={3}
+              />
+            )}
+            <Spacer />
+
+            <Flex>
+              <Text as="h3" fontSize="20px" textAlign="center">
+                Time Until Meeting Starts:
+              </Text>
+            </Flex>
+            <Flex>
+              <Text as="h3" fontSize="150px">
+                {timeUntilMeeting}
+              </Text>
+            </Flex>
+            <Spacer />
+          </VStack>
+        </>
       ) : (
         <VStack w="100%" h="100%">
-          <Flex h="75%">{secondsUnderway > 0 && <CurrentItem />}</Flex>
+          <Flex h="75%">
+            {secondsUnderway > 0 && (
+              <>
+                <VStack>
+                  <Spacer />
+                  <Flex w="50vw" pt="30px" justifyContent="center">
+                    <AgendaItemIndividual item={currentAgendaItem} />
+                  </Flex>
+                  <CurrentItem />
+                </VStack>
+              </>
+            )}
+          </Flex>
           <Flex h="20%">
             <VStack h="100%">
               <Flex>

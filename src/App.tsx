@@ -10,7 +10,7 @@ import AgendaItemList from "./Sidebar/AgendaItemList.component";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { secondsUnderway, meetingIsComplete, agendaItems, setAgendaItems } =
+  const { secondsUnderway, meetingIsComplete, agendaItems, setAgendaItems, currentAgendaItem } =
     useAgenda();
   const [meetingStartDate, setMeetingStartDate] = useState(() => {
     const currentDate = new Date();
