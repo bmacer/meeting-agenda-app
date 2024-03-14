@@ -67,15 +67,6 @@ const MeetingTimer = ({ meetingStartDate }: { meetingStartDate: Date }) => {
       {secondsUnderway < 1 ? (
         <>
           <VStack w="100%">
-            {true && (
-              <Box
-                w="100px"
-                h="100px"
-                bgColor="red"
-                position="absolute"
-                zIndex={3}
-              />
-            )}
             <Spacer />
 
             <Flex>

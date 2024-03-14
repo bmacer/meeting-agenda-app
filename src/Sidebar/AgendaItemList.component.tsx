@@ -96,7 +96,9 @@ const AgendaItemList = () => {
                   </Draggable>
                 ))}
                 {provided.placeholder}
-                <AddItemForm />
+                <Flex h="150px" w="100%">
+                  <AddItemForm />
+                </Flex>
               </Box>
             )}
           </Droppable>

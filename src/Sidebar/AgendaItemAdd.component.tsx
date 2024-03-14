@@ -17,6 +17,7 @@ import {
   VStack,
   Flex,
   Text,
+  Spacer,
 } from "@chakra-ui/react";
 import { useAgenda } from "../AgendaContext"; // Ensure this is the correct path to your context
 import { v4 as uuidv4 } from "uuid"; // Ensure you have uuid installed to generate unique ids
@@ -66,82 +67,80 @@ const AddItemForm: React.FC = () => {
   };
 
   return (
-    <Box
-      h="200px"
-      w="30vw"
-      bgColor="grey"
-      //   style={{
-      //     background: "orange",
-      //     padding: 8,
-      //     width: 250,
-      //     minHeight: 500,
-      //   }}
-    >
-      <Box
+    <Flex h="100%" w="100%" bgColor="grey">
+      <Flex
+        h="100%"
+        w="100%"
         as="form"
         onSubmit={handleSubmit}
         style={{
           userSelect: "none",
-          padding: 16,
-          margin: "0 0 8px 0",
-          minHeight: "50px",
           color: "white",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <HStack justifyContent="center">
-          <FormControl isRequired>
-            <Textarea
-              required={true}
-              autoComplete="off"
-              id="description"
-              placeholder="Add agenda item..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              h="120px"
-              w="100%"
-              fontSize="25px"
-              overflowWrap="normal"
-            />
-          </FormControl>
-          <VStack h="100%">
-            <Text>Mins</Text>
-            <Flex w="50px" h="30px" bgColor="blue">
-              <FormControl w="100%" isRequired>
-                <NumberInput
-                  h="100%"
-                  w="100%"
-                  value={minutes}
-                  onChange={handleMinutesChange}
-                >
-                  <NumberInputField
+        <HStack justifyContent="center" h="100%" w="100%">
+          <Flex h="90%" w="80%" p="3%">
+            <FormControl isRequired h="100%">
+              <Textarea
+                required={true}
+                autoComplete="off"
+                id="description"
+                placeholder="Add agenda item..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                h="100%"
+                w="95%"
+                fontSize="25px"
+                overflowWrap="normal"
+              />
+            </FormControl>
+          </Flex>
+          <Flex h="90%" w="20%">
+            <VStack h="100%" w="100%">
+              <Flex h="20%" w="100%">
+                <Text>Mins</Text>
+              </Flex>
+              <Flex w="100%" h="20%">
+                <FormControl w="80%" isRequired>
+                  <NumberInput
                     h="100%"
                     w="100%"
-                    placeholder="⏰"
-                    id="minutes"
-                  />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper color="blue" />
-                    <NumberDecrementStepper color="blue" />
-                  </NumberInputStepper>
-                </NumberInput>
-              </FormControl>
-            </Flex>
-            <Button
-              h="50px"
-              w="100%"
-              colorScheme="blue"
-              aria-label="Add Item"
-              onClick={handleSubmit}
-            >
-              +
-            </Button>
-          </VStack>
+                    value={minutes}
+                    onChange={handleMinutesChange}
+                  >
+                    <NumberInputField
+                      h="100%"
+                      w="100%"
+                      placeholder="⏰"
+                      id="minutes"
+                    />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper color="blue" />
+                      <NumberDecrementStepper color="blue" />
+                    </NumberInputStepper>
+                  </NumberInput>
+                </FormControl>
+              </Flex>
+              <Spacer />
+              <Flex h="40%" w="100%">
+                <Button
+                  h="30px"
+                  w="30px"
+                  colorScheme="blue"
+                  aria-label="Add Item"
+                  onClick={handleSubmit}
+                >
+                  +
+                </Button>
+              </Flex>
+            </VStack>
+          </Flex>
         </HStack>
-      </Box>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
 
